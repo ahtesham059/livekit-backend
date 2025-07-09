@@ -17,24 +17,3 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
-
-  livekit-server:
-    image: livekit/livekit-server:latest
-    container_name: hear-me-server-livekit
-    ports:
-      - '7880:7880'
-      - '7881:7881'
-      - '5000-6000:5000-6000/udp'
-    environment:
-      LIVEKIT_KEYS: 'devkey: secret'
-      LIVEKIT_REDIS: redis://redis:6379
-      LIVEKIT_PORT: 7880
-      LIVEKIT_UDP_PORT: 5000
-      LIVEKIT_UDP_PORT_RANGE: 5000-6000
-      LIVEKIT_LOG_LEVEL: debug
-    depends_on:
-      - redis
-
-  redis:
-    image: redis:6
-    restart: unless-stopped
